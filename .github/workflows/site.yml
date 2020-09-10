@@ -1,0 +1,42 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [14]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node_version: ${{ matrix.node_version }}
+      - name: Build
+        run: |
+          yarn install
+          yarn test
+          yarn build
+      - name: Deploy
+        id: deploy
+        uses: youyo/aws-cdk-github-actions@v1
+        with:
+          cdk_subcommand: "deploy --require-approval never"
+          cdk_stack: "*"
+          actions_comment: false
+          working_dir: "infra"
+          args: ""
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-west-1"
+      - name: Check deploy status
+        if: job.steps.deploy.status == failure()
+        run: exit 1
