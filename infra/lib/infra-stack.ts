@@ -18,7 +18,7 @@ export class InfraStack extends cdk.Stack {
     });
 
     this.bucket.addLifecycleRule({
-      abortIncompleteMultipartUploadAfter: Duration.hours(1),
+      abortIncompleteMultipartUploadAfter: Duration.days(1),
       enabled: true,
       id: "orphaned-objects",
       noncurrentVersionExpiration: Duration.days(14),
