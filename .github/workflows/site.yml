@@ -38,5 +38,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: "eu-west-1"
       - name: Check deploy status
-        if: job.steps.deploy.status == failure()
+        if: steps.deploy.outputs.status_code == 1
         run: exit 1
