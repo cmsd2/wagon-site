@@ -4,6 +4,6 @@ import * as cdk from "@aws-cdk/core";
 import { WagonSiteStack } from "../lib/wagon-site-stack";
 
 const app = new cdk.App();
-new WagonSiteStack(app, "WagonSiteStack", {
+new WagonSiteStack(app, "wagon-site-stack", {
   envName: "prod",
 });
