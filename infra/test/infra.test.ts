@@ -8,7 +8,7 @@ test("Empty Stack", () => {
   const app = new cdk.App();
   // WHEN
   const domain = new WagonDomainStack(app, "MyTestDomainStack", {
-    domainName: "wagon-test.octomonkey.cloud",
+    name: "wagon-test",
     zoneIdParam: "omcloud-cloud-domain-zoneId",
     zoneNameParam: "omcloud-cloud-domain-zoneName",
   });

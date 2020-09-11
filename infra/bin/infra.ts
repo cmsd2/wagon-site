@@ -8,7 +8,7 @@ import { WagonCertStack } from "../lib/wagon-cert-stack";
 const app = new cdk.App();
 
 const domain = new WagonDomainStack(app, "wagon-domain", {
-  domainName: "wagon.octomonkey.cloud",
+  name: "wagon",
   zoneIdParam: "omcloud-cloud-domain-zoneId",
   zoneNameParam: "omcloud-cloud-domain-zoneName",
 });
