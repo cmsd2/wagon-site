@@ -92,7 +92,7 @@ export class WagonSiteStack extends cdk.Stack {
         httpVersion: cloudfront.HttpVersion.HTTP2,
         viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(
           props.cert,
-          { aliases: [props.domainName] }
+          { aliases: [props.domainName + "." + props.zone.zoneName] }
         ),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       }

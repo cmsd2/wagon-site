@@ -21,7 +21,7 @@ test("Empty Stack", () => {
   const stack = new WagonSite.WagonSiteStack(app, "MyTestStack", {
     envName: "test",
     cert: cert.cert,
-    domainName: "wagon-test.octomonkey.cloud",
+    domainName: "wagon-test",
     zone: domain.zone,
   });
   // THEN
