@@ -7,6 +7,7 @@ import * as route53targets from "@aws-cdk/aws-route53-targets";
 import * as ssm from "@aws-cdk/aws-ssm";
 import * as acm from "@aws-cdk/aws-certificatemanager";
 import { Duration } from "@aws-cdk/core";
+import { domain } from "process";
 
 export interface WagonSiteProps extends cdk.StackProps {
   envName: string;
@@ -90,7 +91,8 @@ export class WagonSiteStack extends cdk.Stack {
         priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
         httpVersion: cloudfront.HttpVersion.HTTP2,
         viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(
-          props.cert
+          props.cert,
+          { aliases: [props.domainName] }
         ),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       }
