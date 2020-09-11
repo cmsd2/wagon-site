@@ -12,7 +12,7 @@ import { domain } from "process";
 export interface WagonSiteProps extends cdk.StackProps {
   envName: string;
   zone: route53.IHostedZone;
-  domainName: string;
+  domainName?: string;
   cert: acm.ICertificate;
 }
 
@@ -70,6 +70,11 @@ export class WagonSiteStack extends cdk.Stack {
 
     this.bucket.grantRead(this.oai.grantPrincipal);
 
+    let alias = props.zone.zoneName;
+    if (props.domainName) {
+      alias = props.domainName + "." + alias;
+    }
+
     this.distribution = new cloudfront.CloudFrontWebDistribution(
       this,
       "distribution",
@@ -92,7 +97,7 @@ export class WagonSiteStack extends cdk.Stack {
         httpVersion: cloudfront.HttpVersion.HTTP2,
         viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(
           props.cert,
-          { aliases: [props.domainName + "." + props.zone.zoneName] }
+          { aliases: [alias] }
         ),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       }

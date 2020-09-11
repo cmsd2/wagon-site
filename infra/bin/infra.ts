@@ -21,6 +21,6 @@ const cert = new WagonCertStack(app, "wagon-cert", {
 const site = new WagonSiteStack(app, "wagon-site", {
   envName: "prod",
   zone: domain.zone,
-  domainName: "wagon",
+  domainName: undefined,
   cert: cert.cert,
 });
