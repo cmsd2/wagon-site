@@ -27,6 +27,10 @@
     "@aws-cdk/aws-iam": "1.62.0",
     "@aws-cdk/aws-cloudfront": "1.62.0",
     "@aws-cdk/aws-cloudfront-origins": "1.62.0",
+    "@aws-cdk/aws-route53": "1.62.0",
+    "@aws-cdk/aws-route53-targets": "1.62.0",
+    "@aws-cdk/aws-certificatemanager": "1.62.0",
+    "@aws-cdk/aws-ssm": "1.62.0",
     "source-map-support": "^0.5.16"
   }
 }
