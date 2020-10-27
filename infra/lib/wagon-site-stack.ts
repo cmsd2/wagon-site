@@ -85,7 +85,8 @@ export class WagonSiteStack extends cdk.Stack {
           {
             errorCode: 404,
             responseCode: 200,
-            responsePagePath: "/index.html"
+            responsePagePath: "/index.html",
+            errorCachingMinTtl: 3600,
           }
         ],
         originConfigs: [
