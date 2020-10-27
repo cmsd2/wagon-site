@@ -14,6 +14,8 @@ export interface WagonSiteProps extends cdk.StackProps {
   zone: route53.IHostedZone;
   domainName?: string;
   cert: acm.ICertificate;
+  apiDomainName: string;
+  apiPath: string;
 }
 
 export class WagonSiteStack extends cdk.Stack {
@@ -79,6 +81,7 @@ export class WagonSiteStack extends cdk.Stack {
       this,
       "distribution",
       {
+        
         originConfigs: [
           {
             s3OriginSource: {
@@ -91,6 +94,46 @@ export class WagonSiteStack extends cdk.Stack {
               },
             ],
           },
+          {
+            customOriginSource: {
+              domainName: props.apiDomainName,
+              originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTPS_ONLY,
+              originPath: props.apiPath,
+            },
+            
+            behaviors: [
+              {
+                allowedMethods: cloudfront.CloudFrontAllowedMethods.ALL,
+                cachedMethods: cloudfront.CloudFrontAllowedCachedMethods.GET_HEAD_OPTIONS,
+                compress: true,
+                pathPattern: "/me",
+                forwardedValues: {
+                  queryString: true,
+                  headers: [
+                    "Authorization"
+                  ],
+                  cookies: {
+                    forward: "all",
+                  },
+                }
+              },
+              {
+                allowedMethods: cloudfront.CloudFrontAllowedMethods.ALL,
+                cachedMethods: cloudfront.CloudFrontAllowedCachedMethods.GET_HEAD_OPTIONS,
+                compress: true,
+                pathPattern: "/api/*",
+                forwardedValues: {
+                  queryString: true,
+                  headers: [
+                    "Authorization"
+                  ],
+                  cookies: {
+                    forward: "all",
+                  },
+                }
+              }
+            ]
+          }
         ],
         enableIpV6: true,
         priceClass: cloudfront.PriceClass.PRICE_CLASS_100,

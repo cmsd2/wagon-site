@@ -4,6 +4,7 @@ import * as cdk from "@aws-cdk/core";
 import { WagonSiteStack } from "../lib/wagon-site-stack";
 import { WagonDomainStack } from "../lib/wagon-domain-stack";
 import { WagonCertStack } from "../lib/wagon-cert-stack";
+import { Fn } from "@aws-cdk/core";
 
 const app = new cdk.App();
 
@@ -23,4 +24,6 @@ const site = new WagonSiteStack(app, "wagon-site", {
   zone: domain.zone,
   domainName: undefined,
   cert: cert.cert,
+  apiDomainName: Fn.importValue("WagonApiDomainName"),
+  apiPath: Fn.importValue("WagonApiPath")
 });

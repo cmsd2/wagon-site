@@ -1,6 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { awsconfig } from "./aws-exports";
+import { Amplify } from "aws-amplify";
+import { withAuthenticator, SignOut } from "aws-amplify-react";
+
+Amplify.configure(awsconfig);
 
 function App() {
   return (
@@ -10,6 +15,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <SignOut />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -23,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
