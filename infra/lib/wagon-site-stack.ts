@@ -106,21 +106,6 @@ export class WagonSiteStack extends cdk.Stack {
                 allowedMethods: cloudfront.CloudFrontAllowedMethods.ALL,
                 cachedMethods: cloudfront.CloudFrontAllowedCachedMethods.GET_HEAD_OPTIONS,
                 compress: true,
-                pathPattern: "/me",
-                forwardedValues: {
-                  queryString: true,
-                  headers: [
-                    "Authorization"
-                  ],
-                  cookies: {
-                    forward: "all",
-                  },
-                }
-              },
-              {
-                allowedMethods: cloudfront.CloudFrontAllowedMethods.ALL,
-                cachedMethods: cloudfront.CloudFrontAllowedCachedMethods.GET_HEAD_OPTIONS,
-                compress: true,
                 pathPattern: "/api/*",
                 forwardedValues: {
                   queryString: true,
