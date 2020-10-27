@@ -81,7 +81,13 @@ export class WagonSiteStack extends cdk.Stack {
       this,
       "distribution",
       {
-        
+        errorConfigurations: [
+          {
+            errorCode: 404,
+            responseCode: 200,
+            responsePagePath: "/index.html"
+          }
+        ],
         originConfigs: [
           {
             s3OriginSource: {
