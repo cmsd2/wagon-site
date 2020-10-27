@@ -4,6 +4,7 @@ import "./App.css";
 import { awsconfig } from "./aws-exports";
 import { Amplify } from "aws-amplify";
 import { withAuthenticator, SignOut } from "aws-amplify-react";
+import '@aws-amplify/ui/dist/style.css';
 
 Amplify.configure(awsconfig);
 
