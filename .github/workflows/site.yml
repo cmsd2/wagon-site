@@ -24,6 +24,11 @@ jobs:
           yarn install
           yarn test
           yarn build
+        env:
+          REACT_APP_REGION: ${{ secrets.REACT_APP_REGION }}
+          REACT_APP_IDENTITY_POOL_ID: ${{ secrets.REACT_APP_IDENTITY_POOL_ID }}
+          REACT_APP_USER_POOL_ID: ${{ secrets.REACT_APP_USER_POOL_ID }}
+          REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
       - name: Deploy
         id: deploy
         uses: youyo/aws-cdk-github-actions@v1
